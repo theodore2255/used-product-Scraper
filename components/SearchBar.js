@@ -215,12 +215,12 @@ const SearchBar = () => {
           placeholder="Car Location" 
           value={Car_location} 
           onChange={(e) => setCar_location(e.target.value)} 
-          className="p-2 border rounded mb-4" 
+          className="p-2 border rounded mb-4 " 
         />
         <button 
           
           onClick={handleSearch} 
-          className="bg-red-500 text-white px-10 py-2 rounded"
+          className="bg-red-400  hover:bg-red-500 text-white px-10 py-2 rounded"
         >
           Search
         </button>

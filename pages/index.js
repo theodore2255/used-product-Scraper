@@ -11,32 +11,6 @@ const Home = () => {
       <Header />
       <Hero />
       <SearchBar />
-      <p>sjdlc jsldk vvlksd ck;l;k discoversd
-        dsckm;sjdlcsdclml  
-        sf fusbi s uidc uwi 
-        dsjci wu cwoub cuow eco widthcdjso w i 
-      </p>
-      <p>sjdlc jsldk vvlksd ck;l;k discoversd
-        dsckm;sjdlcsdclml  
-        sf fusbi s uidc uwi 
-        dsjci wu cwoub cuow eco widthcdjso w i 
-      </p><p>sjdlc jsldk vvlksd ck;l;k discoversd
-        dsckm;sjdlcsdclml  
-        sf fusbi s uidc uwi 
-        dsjci wu cwoub cuow eco widthcdjso w i 
-      </p><p>sjdlc jsldk vvlksd ck;l;k discoversd
-        dsckm;sjdlcsdclml  
-        sf fusbi s uidc uwi 
-        dsjci wu cwoub cuow eco widthcdjso w i 
-      </p><p>sjdlc jsldk vvlksd ck;l;k discoversd
-        dsckm;sjdlcsdclml  
-        sf fusbi s uidc uwi 
-        dsjci wu cwoub cuow eco widthcdjso w i 
-      </p><p>sjdlc jsldk vvlksd ck;l;k discoversd
-        dsckm;sjdlcsdclml  
-        sf fusbi s uidc uwi 
-        dsjci wu cwoub cuow eco widthcdjso w i 
-      </p>
         <Footer />
       </div>
 

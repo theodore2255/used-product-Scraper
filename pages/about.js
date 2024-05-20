@@ -5,8 +5,6 @@ import Link from 'next/link';
 const About = () => {
   return (
     <div>
-      <Navbar />
-      <Header />
       <section className="container mx-auto py-8">
         <h2 className="text-2xl font-bold mb-4">About Us</h2>
         <p>

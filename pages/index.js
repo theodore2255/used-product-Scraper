@@ -14,7 +14,9 @@ const Index = () => {
       </div>
       <div class="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
         <h1 class="sm:w-2/5 text-gray-900 font-medium title-font text-2xl mb-2 sm:mb-0">Your stop for used products</h1>
-        <p class="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0">Street art subway tile salvia four dollar toast bitters selfies quinoa yuccie synth meditation iPhone intelligentsia prism tofu. Viral gochujang bitters dreamcatcher.</p>
+        <p class="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0">Welcome to My Used Product Scrapping Website! We're a dedicated team passionate about connecting sellers of pre-owned 
+        items with interested buyers. We offer a diverse selection of used products at competitive prices. Our goal is to ensure a seamless 
+        and hassle-free experience for both sellers and buyers alike. </p>
       </div>
     </div>
     <div class="flex flex-wrap justify-center sm:-m-4 -mx-4 -mb-10 -mt-4">

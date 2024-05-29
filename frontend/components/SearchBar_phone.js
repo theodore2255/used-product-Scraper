@@ -49,13 +49,7 @@ const brandsData = {
   "BlackBerry": {
     models: ["KEY2", "KEYone", "Motion", "Aurora", "Priv", "Leap", "Classic", "Passport", "Z3", "Z30", "Q10", "Z10", "Q5", "Curve 9320", "Bold 9900"]
   },
-  // You can continue adding more brands and models here
 };
-
-// Example
-
-  // Add more brands and models as needed
-
 const UsedSmartphoneSearchBar = () => {
   const [Brand, setBrand] = useState('');
   const [Model, setModel] = useState('');

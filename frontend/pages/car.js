@@ -1,35 +1,38 @@
+// pages/car.js
+import { useState } from 'react';
+import { fetchCars } from '../utils/api';
+import FlipCard from '../components/FlipCard';
 import Hero from '../components/Hero';
-import Footer from '../components/Footer';
 import SearchBar from '../components/SearchBar';
-import FlipCard from '../components/FlipCard'; // Import the FlipCard component
 
-const Home = () => {
-  const cardsData = [
-    {
-      image: 'images/vehicle.jpg',
-      title: "The King's Man",
-      rating: '9.0 Rating',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis itaque assumenda saepe animi maxime libero non quasi, odit natus veritatis enim culpa nam inventore doloribus quidem temporibus amet velit accusamus.',
-      buttonText: 'Watch Now'
-    },
-    // Add more card objects as needed
-  ];
+const CarPage = () => {
+  const [model, setModel] = useState('');
+  const [location, setLocation] = useState('');
+  const [cars, setCars] = useState([]);
+
+  const handleSearch = async () => {
+    const carDetails = await fetchCars(model, location);
+    console.log('Fetched car details:', carDetails); // Add this line
+    setCars(carDetails);
+  };
 
   return (
     <div className="bg-white min-h-screen flex flex-col">
-
       <Hero />
-      <SearchBar />
-
+      <SearchBar
+        model={model}
+        setModel={setModel}
+        location={location}
+        setLocation={setLocation}
+        handleSearch={handleSearch}
+      />
       <main className="flex flex-wrap justify-center items-center gap-4 p-4">
-        {cardsData.map((data, index) => (
-          <FlipCard key={index} data={data} /> // Pass data as prop to FlipCard
+        {cars.map((car, index) => (
+          <FlipCard key={index} data={car} /> 
         ))}
       </main>
-
-      <Footer />
     </div>
   );
 };
 
-export default Home;
+export default CarPage;

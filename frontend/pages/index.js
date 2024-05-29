@@ -1,9 +1,4 @@
 import React from 'react';
-import Header from '../components/Header';
-import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
-import Footer from '@/components/Footer';
-import SearchBar from '../components/SearchBar';
 import Link from 'next/link';
 const Index = () => {
   return (
@@ -40,7 +35,7 @@ const Index = () => {
           <div className ="rounded-lg h-64 overflow-hidden">
             <img alt="content" className ="object-cover object-center h-full w-full" src="https://media.istockphoto.com/id/1057455004/vector/hand-hold-phone-logotype-hand-hold-smartphone.jpg?s=612x612&w=0&k=20&c=-RXiEdROvJMurKjA09aBGn4FJ2_qo_gIRMHdnV92oS4=" />
           </div>
-          <h2 className ="text-xl font-medium title-font text-gray-900 mt-5">Used Phone</h2>
+          <h2 className =" text-xl font-medium title-font text-gray-900 mt-5">Used Phone</h2>
           <p className ="text-base leading-relaxed mt-2">Premium Quality</p>
           <div className ="text-green-500 inline-flex items-center mt-3">Learn More
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className ="w-4 h-4 ml-2" viewBox="0 0 24 24">

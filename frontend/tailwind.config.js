@@ -12,7 +12,40 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      transformOrigin: {
+        '0': '0%',
+      },
+      rotate: {
+        '360': '360deg',
+      },
+      transitionProperty: {
+        'height': 'height',
+      },
+      scale: {
+        '200': '2',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.preserve-3d': {
+          'transform-style': 'preserve-3d',
+        },
+        '.backface-hidden': {
+          'backface-visibility': 'hidden',
+        },
+        '.rotate-y-180': {
+          'transform': 'rotateY(180deg)',
+        },
+        '.transform-style-3d': {
+          'transform-style': 'preserve-3d',
+        },
+        '.my-rotate-y-180': {
+          '--tw-rotate': '180deg',
+          'transform': 'rotateY(var(--tw-rotate))',
+        },
+      })
+    }
+  ],
 };

@@ -1,11 +1,23 @@
-# cars/scraper.py
+# backend/cars/scraper.py
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-import pandas as pd
 import re
 import time
+import django
+import os
+import sys
+
+# Add the project root directory to the Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Initialize Django settings
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "upsbackend.settings")  # Change "upsbackend" to your actual project name
+django.setup()
+
+from cars.models import Car  # Use absolute import
 
 def generate_url(car_name, location):
     car_name = car_name.replace(' ', '-').lower()
@@ -17,7 +29,7 @@ def scrape_cars(car_name, location):
 
     service = Service(ChromeDriverManager().install())
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # Run headless Chrome to avoid GUI issues
+    options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
@@ -36,15 +48,8 @@ def scrape_cars(car_name, location):
             break
         last_height = new_height
 
-    names = []
-    years = []
-    km_drivens = []
-    fuel_types = []
-    transmissions = []
-    prices = []
-    locations = []
-    links = []
-
+    # Additional wait to ensure all images are loaded
+    time.sleep(5)
     car_entries = driver.find_elements(By.CSS_SELECTOR, "a.IIJDn")
 
     for car_entry in car_entries:
@@ -77,28 +82,37 @@ def scrape_cars(car_name, location):
 
         link = car_entry.get_attribute('href')
 
-        names.append(name)
-        years.append(year)
-        km_drivens.append(km_driven)
-        fuel_types.append(fuel_type)
-        transmissions.append(transmission)
-        prices.append(current_price)
-        locations.append(location)
-        links.append(link)
+        img_url = None
+        try:
+            img_element = car_entry.find_element(By.CSS_SELECTOR, 'div.RPKrE img')
+            img_url = img_element.get_attribute('src')
+            
+            # Ensure image is fully loaded by checking if the src attribute is not an empty string
+            if not img_url:
+                img_url = img_element.get_attribute('data-src')
+        except Exception as e:
+            print(f"Error extracting image URL: {e}")
+        
+        # Set a default image URL if img_url is None
+        if not img_url:
+            img_url = 'https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg'  # Replace with your default image URL
+
+        # Save the car data to the database
+        print(f"Scraped car: {name}, Year: {year}, Image URL: {img_url}")
+
+        Car.objects.create(
+            model=name,
+            year=year,
+            kms_driven=km_driven,
+            fuel_type=fuel_type,
+            transmission=transmission,
+            price_rs=current_price,
+            location=location,
+            link=link,
+            img=img_url
+        )
 
     driver.quit()
 
-    cars_data = []
-    for i in range(len(names)):
-        cars_data.append({
-            'Car': names[i],
-            'Year': years[i],
-            'KmS_Driven': km_drivens[i],
-            'Fuel_Type': fuel_types[i],
-            'Transmission': transmissions[i],
-            'Price_Rs': prices[i],
-            'Location': locations[i],
-            'Link': links[i]
-        })
-
-    return cars_data
+if __name__ == "__main__":
+    scrape_cars("Honda City", "mumbai")  # Example call to scrape cars

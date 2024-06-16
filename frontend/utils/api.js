@@ -1,15 +1,9 @@
-import axios from 'axios';
-
-const API_URL = 'http://localhost:8000/api/cars/';
+// frontend/utils/api.js
 
 export const fetchCars = async (model, location) => {
-  try {
-    const response = await axios.get(API_URL, {
-      params: { model, location }
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching car details:', error);
-    return [];
+  const response = await fetch(`/api/cars/?model=${model}&location=${location}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch car details');
   }
+  return response.json();
 };

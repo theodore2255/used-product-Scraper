@@ -1,4 +1,5 @@
-// pages/car.js
+// frontend/pages/CarPage.js
+
 import { useState } from 'react';
 import { fetchCars } from '../utils/api';
 import FlipCard from '../components/FlipCard';
@@ -11,9 +12,14 @@ const CarPage = () => {
   const [cars, setCars] = useState([]);
 
   const handleSearch = async () => {
-    const carDetails = await fetchCars(model, location);
-    console.log('Fetched car details:', carDetails); // Add this line
-    setCars(carDetails);
+    try {
+      const carDetails = await fetchCars(model, location);
+      console.log('Fetched car details:', carDetails);
+      setCars(carDetails);
+    } catch (error) {
+      console.error('Error fetching car details:', error);
+      setCars([]);
+    }
   };
 
   return (
@@ -27,9 +33,13 @@ const CarPage = () => {
         handleSearch={handleSearch}
       />
       <main className="flex flex-wrap justify-center items-center gap-4 p-4">
-        {cars.map((car, index) => (
-          <FlipCard key={index} data={car} /> 
-        ))}
+        {cars.length === 0 ? (
+          <p>No cars found.</p>
+        ) : (
+          cars.map((car, index) => (
+            <FlipCard key={index} data={car} />
+          ))
+        )}
       </main>
     </div>
   );
